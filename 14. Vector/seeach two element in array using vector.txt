@@ -1,0 +1,51 @@
+int bssi(vector<int>&nums,int t){
+int lo = 0;
+int hi = nums.size()-1;
+int ans = INT_MAX;
+while(lo <= hi){
+int mid = lo+(hi-lo)/2;
+if(nums[mid] == t){
+ans = min(ans,mid);
+hi = mid-1;
+}else if(nums[mid] > t)hi = mid-1;
+else lo = mid+1;
+}
+
+return (ans == INT_MAX ? -1 : ans);
+}
+
+int bsei(vector<int>&nums,int t){
+
+int lo = 0;
+int hi = nums.size()-1;
+int ans = -1;
+while(lo <= hi){
+int mid = lo+(hi-lo)/2;
+if(nums[mid] == t){
+ans = max(ans,mid);
+lo= mid+1;
+}else if(nums[mid] < t)lo = mid+1;
+else hi = mid-1;
+}
+
+return ans;
+}
+
+vector<int> searchRange(vector<int>& nums, int target) {
+
+// if(!binary_search(nums.begin(),nums.end(),target))return {-1,-1};
+
+int si = bssi(nums,target);
+int ei = bsei(nums,target);
+
+// int si = -1;
+// int ei = -1;
+// for(int i = 0;i<nums.size();i++){
+// if(nums[i] == target){
+// if(si == -1)si = i;
+// ei = i;
+// }
+// }
+
+return {si,ei};
+}
